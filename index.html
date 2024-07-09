@@ -7,95 +7,101 @@
     <title>Perfect Pizza</title>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 </head>
 
 <body>
     <h1 class="heading">Perfect Pizza</h1>
-    <div class="pizzar" x-data="pizzaCart()">
-        <div class="cart">
-            <h2 class="heading">Shopping Cart</h2>
-            <div class="heading">
-                <div>
-                    <div x-text="cart.small"></div>
-                    <p>Small
-                        <button @click="addPizza('small', 30.00)">+</button>
-                        <button @click="removePizza('small')">-</button>
-                        30.00
-                    </p>
+    <div x-data="pizzaCart()">
+        <div class="pizzar">
+            <div class="cart">
+                <h2 class="heading">Shopping Cart<i class="fas fa-shopping-cart"></i></h2>
+                <div class="heading">
+                    <div>
+                        <!-- <div x-text="cart.small"></div> -->
+                        <p>Small
+                            <button @click="addPizza('small', 30.00)">+</button>
+                            <span x-text="cart.small"></span>
+                            <button @click="removePizza('small')">-</button>
+                            30.00
+                        </p>
+                    </div>
+
+                    <div>
+                        <!-- <div x-text="cart.medium"></div> -->
+                        <p>Medium
+                            <button @click="addPizza('medium', 55.00)">+</button>
+                            <span x-text="cart.medium"></span>
+                            <button @click="removePizza('medium')">-</button>
+                            55.00
+                        </p>
+                    </div>
+
+                    <div>
+                        <!-- <div x-text="cart.large"></div> -->
+                        <p>Large
+                            <button @click="addPizza('large', 85.00)">+</button>
+                            <span x-text="cart.large"></span>
+                            <button @click="removePizza('large')">-</button>
+                            90.00
+                        </p>
+                    </div>
+
+                    <div>
+                        Total cost: <span x-text="totalCost.toFixed(2)"></span>
+                    </div>
+
+                    <button @click="showPayment = true" x-show="hasPizzas">Checkout</button>
+
+                    <div x-show="showPayment" x-transition>
+                        <div>
+                            <label for="payment">Payment amount:</label>
+                            <input type="number" id="payment" x-model="paymentAmount" />
+                            <button @click="processPayment()">Buy</button>
+                        </div>
+                    </div>
+
+                    <div x-show="message" x-text="message" x-transition></div>
+                    <div x-show="change" x-text="'Change: ' + change.toFixed(2)" x-transition></div>
                 </div>
+            </div>
+        </div>
 
+
+        <div class="pizzas">
+            <div class="pizza small_pizza">
+                <img src="https://user-images.githubusercontent.com/34037/167313920-09aeb40f-9952-439b-8e54-a04c02caa427.png"
+                    width="100">
+                <h2>Small Pizza</h2>
+                <h3>R30.00</h3>
                 <div>
-                <div x-text="cart.medium"></div>
-                <p>Medium
-                    <button @click="addPizza('medium', 55.00)">+</button>
-                    <button @click="removePizza('medium')">-</button>
-                    55.00
-                </p>
+                    Small margherita pizza with 3 toppings max. 1 meat topping, 3 or less other toppings.
+                </div>
+                <button @click="addPizza('small', 30.00)">Buy</button>
             </div>
 
-            <div>
-                <div x-text="cart.large"></div>
-                <p>Large
-                    <button @click="addPizza('large', 85.00)">+</button>
-                    <button @click="removePizza('large')">-</button>
-                    85.00
-                </p>
+            <div class="pizza medium_pizza">
+                <img src="https://user-images.githubusercontent.com/34037/167313920-09aeb40f-9952-439b-8e54-a04c02caa427.png"
+                    width="125">
+                <h2>Medium Pizza</h2>
+                <h3>R55.00</h3>
+                <div>
+                    Medium margherita pizza with 3 toppings max. 2 or less meat toppings, 3 or less other toppings.
+                </div>
+                <button @click="addPizza('medium', 55.00)">Buy</button>
             </div>
 
-            <div>
-                <p>Total cost: 
-                </p>
-                <div x-text="totalCost.toFixed(2)"></div>
+            <div class="pizza large_pizza">
+                <img src="https://user-images.githubusercontent.com/34037/167313920-09aeb40f-9952-439b-8e54-a04c02caa427.png"
+                    width="150">
+                <h2>Large Pizza</h2>
+                <h3>R90.00</h3>
+                <div>
+                    Large margherita pizza with 3 toppings max. 3 or less meat toppings, 3 or less other toppings.
+                </div>
+                <button @click="addPizza('large', 90.00)">Buy</button>
             </div>
-
-            <div>
-                <label for="payment">Payment amount:</label>
-                <input type="number" x-model="paymentAmount" />
-            </div>
-
-            
-                <button @click="checkout()" :disabled="!hasPizzas">Check out</button>
-                <div x-show="message" x-text="message" x-transition></div>
-                <div x-show="change" x-text="'Change: ' + change.toFixed(2)" x-transition></div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="pizzas">
-
-        <div class="pizza small_pizza">
-            <img src="https://user-images.githubusercontent.com/34037/167313920-09aeb40f-9952-439b-8e54-a04c02caa427.png"
-                width="100">
-            <h2>Small Pizza</h2>
-            <h3>R30.00</h3>
-            <div>
-                Small margherita pizza with 3 toppings max. 1 meat topping, 3 or less other toppings.
-            </div>
-            <button @click="addPizza('small', 30.00)">Buy</button>
-        </div>
-
-        <div class="pizza medium_pizza">
-            <img src="https://user-images.githubusercontent.com/34037/167313920-09aeb40f-9952-439b-8e54-a04c02caa427.png"
-                width="125">
-            <h2>Medium Pizza</h2>
-            <h3>R55.00</h3>
-            <div>
-                Medium margherita pizza with 3 toppings max. 2 or less meat toppings, 3 or less other toppings.
-            </div>
-            <button @click="addPizza('medium', 55.00)">Buy</button>
-        </div>
-
-        <div class="pizza large_pizza">
-            <img src="https://user-images.githubusercontent.com/34037/167313920-09aeb40f-9952-439b-8e54-a04c02caa427.png"
-                width="150">
-            <h2>Large Pizza</h2>
-            <h3>R85.00</h3>
-            <div>
-                Large margherita pizza with 3 toppings max. 3 or less meat toppings, 3 or less other toppings.
-            </div>
-            <button @click="addPizza('large', 85.00)">Buy</button>
         </div>
     </div>
 

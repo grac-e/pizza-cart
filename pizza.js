@@ -2,8 +2,9 @@ function pizzaCart() {
     return {
         cart: { small: 0, medium: 0, large: 0 },
         message: '',
-        paymentAmount: 0,
+        paymentAmount: '',
         change: 0,
+        showPayment: false,
         addPizza(size, price) {
             this.cart[size]++;
             this.updateTotalCost();
@@ -15,26 +16,28 @@ function pizzaCart() {
             }
         },
         get totalCost() {
-            return this.cart.small * 30 + this.cart.medium * 55 + this.cart.large * 85;
+            return this.cart.small * 30 + this.cart.medium * 55 + this.cart.large * 90;
         },
         get hasPizzas() {
             return this.totalCost > 0;
         },
-        checkout() {
+        processPayment() {
             if (this.paymentAmount >= this.totalCost) {
                 this.change = this.paymentAmount - this.totalCost;
                 this.message = 'Enjoy your pizzas!';
                 this.cart = { small: 0, medium: 0, large: 0 };
-                this.paymentAmount = 0;
+                this.paymentAmount = '';
                 this.updateTotalCost();
+                this.showPayment = false;
             } else {
-                this.message = 'Sorry - that is not enough money!';
+                this.message = 'Sorry, that is not enough money!';
+                this.change = 0;
             }
             // setTimeout(() => this.message = '', 3000);
             setTimeout(() => {
                 this.message = '';
                 this.change = 0;
-            }, 4000);
+            }, 3000);
         },
         updateTotalCost() {
             this.totalCost;
