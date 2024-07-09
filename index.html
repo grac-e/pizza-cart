@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfect Pizza</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+    <h1 class="heading">Perfect Pizza</h1>
+    <div class="pizzar" x-data="pizzaCart()">
+        <div class="cart">
+            <h2 class="heading">Shopping Cart</h2>
+            <div class="heading">
+                <div>
+                    <div x-text="cart.small"></div>
+                    <p>Small
+                        <button @click="addPizza('small', 30.00)">+</button>
+                        <button @click="removePizza('small')">-</button>
+                        30.00
+                    </p>
+                </div>
+
+                <div>
+                <div x-text="cart.medium"></div>
+                <p>Medium
+                    <button @click="addPizza('medium', 55.00)">+</button>
+                    <button @click="removePizza('medium')">-</button>
+                    55.00
+                </p>
+            </div>
+
+            <div>
+                <div x-text="cart.large"></div>
+                <p>Large
+                    <button @click="addPizza('large', 85.00)">+</button>
+                    <button @click="removePizza('large')">-</button>
+                    85.00
+                </p>
+            </div>
+
+            <div>
+                <p>Total cost: 
+                </p>
+                <div x-text="totalCost.toFixed(2)"></div>
+            </div>
+
+            <div>
+                <label for="payment">Payment amount:</label>
+                <input type="number" x-model="paymentAmount" />
+            </div>
+
+            
+                <button @click="checkout()" :disabled="!hasPizzas">Check out</button>
+                <div x-show="message" x-text="message" x-transition></div>
+                <div x-show="change" x-text="'Change: ' + change.toFixed(2)" x-transition></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="pizzas">
+
+        <div class="pizza small_pizza">
+            <img src="https://user-images.githubusercontent.com/34037/167313920-09aeb40f-9952-439b-8e54-a04c02caa427.png"
+                width="100">
+            <h2>Small Pizza</h2>
+            <h3>R30.00</h3>
+            <div>
+                Small margherita pizza with 3 toppings max. 1 meat topping, 3 or less other toppings.
+            </div>
+            <button @click="addPizza('small', 30.00)">Buy</button>
+        </div>
+
+        <div class="pizza medium_pizza">
+            <img src="https://user-images.githubusercontent.com/34037/167313920-09aeb40f-9952-439b-8e54-a04c02caa427.png"
+                width="125">
+            <h2>Medium Pizza</h2>
+            <h3>R55.00</h3>
+            <div>
+                Medium margherita pizza with 3 toppings max. 2 or less meat toppings, 3 or less other toppings.
+            </div>
+            <button @click="addPizza('medium', 55.00)">Buy</button>
+        </div>
+
+        <div class="pizza large_pizza">
+            <img src="https://user-images.githubusercontent.com/34037/167313920-09aeb40f-9952-439b-8e54-a04c02caa427.png"
+                width="150">
+            <h2>Large Pizza</h2>
+            <h3>R85.00</h3>
+            <div>
+                Large margherita pizza with 3 toppings max. 3 or less meat toppings, 3 or less other toppings.
+            </div>
+            <button @click="addPizza('large', 85.00)">Buy</button>
+        </div>
+    </div>
+
+    <div class="pizza contact_details">
+        <h2>Contact details</h2>
+        <div class="contact">
+            <div>Contact us at: (021)-541-1000</div>
+            <div>info@perfectpizza.co.za</div>
+        </div>
+
+        <div class="address">
+            <div>Pizza Plaza,</div>
+            <div>Dough Road,</div>
+            <div>Base Town.</div>
+        </div>
+
+    </div>
+    <script src="./pizza.js"></script>
+</body>
+
+</html>

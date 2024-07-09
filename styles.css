@@ -1,0 +1,77 @@
+body {
+    background-color: #f2e8cf;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+
+.pizza {
+    padding: 1em;
+    border: 1px solid;
+    margin: 1em;
+    border-radius: 0.2em;
+}
+
+.pizzar {
+    padding: 1em;
+    border: 1px solid;
+    margin: 1em;
+    border-radius: 0.2em;
+    background-color: #ff9b85;
+}
+
+.small_pizza {
+    background-color: #a7c957;
+
+    img {
+        float: left;
+        margin: 0.5em;
+        clear: left;
+    }
+}
+
+.medium_pizza {
+    background-color: #6a994e;
+
+    img {
+        float: left;
+        margin: 0.5em;
+        clear: left;
+    }
+}
+
+.large_pizza {
+    background-color: #4f772d;
+
+    img {
+        float: left;
+        margin: 0.2em;
+        clear: left;
+    }
+}
+
+.contact_details {
+    background-color: #bc4749;
+    padding-bottom: 5em;
+}
+
+/* @media (min-width: 960px) {
+    .pizzas {
+        display: flex;
+    }
+} */
+
+    .pizzas {
+        display: flex;
+    }
+
+.contact {
+    float: inline-start;
+}
+
+.address {
+    float: inline-end;
+}
+
+.heading {
+    text-align: center;
+}
